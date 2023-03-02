@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Find Flights</title>
+    </head>
+    <body>
+        <h2>Find Flights:</h2>
+        <form [formGroup]="findFlightsForm" (ngSubmit)="onSubmit()">
+            From: <input type="text" name="from" formControlName="from"/>
+            To: <input type="text" name="to" formControlName="to"/>
+            Departure Date: <input type="text" name="departureDate" formControlName="departureDate"/>
+            <input type="submit" value="Search">
+        </form>
+    </body>
+</html>
