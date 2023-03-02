@@ -7,18 +7,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./passenger-details.component.css']
 })
 export class PassengerDetailsComponent {
-
-  flightData:any;
-  constructor(private activatedRoute: ActivatedRoute) {}
-
-  ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      if(params['flightData']){
-        let flightData = params['flightData'];
-        console.log(flightData);
-        this.flightData = flightData;
-        // Use the flightsData here
-      }
-    });
-  }   
+   flightData:any;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
@@ -23,8 +23,13 @@ export class FindFlightsComponent {
   onSubmit(){
     let data = this.findFlightsForm.value;
     this.reservationService.getFlights(data.from, data.to, data.departureDate).subscribe(
-      flightData =>{
-        this.router.navigate(['/displayFlights'], flightData);
+      flightsData =>{
+        let navigationExtras: NavigationExtras = {
+          state: {
+            flightsData: JSON.stringify(flightsData)
+          }
+        };
+        this.router.navigate(['/displayFlights'], navigationExtras);
       }
     );
   }
