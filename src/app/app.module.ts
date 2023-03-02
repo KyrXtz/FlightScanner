@@ -15,6 +15,8 @@ import { StartCheckInComponent } from './components/start-check-in/start-check-i
 import { CheckInComponent } from './components/check-in/check-in.component';
 import { ConfirmCheckInComponent } from './components/confirm-check-in/confirm-check-in.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule  
+    FormsModule,
+    BrowserAnimationsModule  
   ],
   providers: [ReservationService],
   bootstrap: [AppComponent]

@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">
+        <img src="../assets/images/logo.png" alt="Flight Scanner Logo" width="40" height="40" class="d-inline-block align-text-top me-2" style="object-fit: contain;">
+        Flight Scanner
+      </a>
+    </div>
+  </nav>
+  
+<div class="bg" [@fadeInOut]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet #o="outlet"></router-outlet>
+</div>
