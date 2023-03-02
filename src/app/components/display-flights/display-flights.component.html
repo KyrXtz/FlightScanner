@@ -19,6 +19,7 @@
                     <td>{{flight?.departureCity}}</td>
                     <td>{{flight?.arrivalCity}}</td>
                     <td>{{flight?.estimatedDepartureTime}}</td>
+                    <td><a (click)="onSelect(flight.id)">Select</a></td>
                 </tr>
             </tbody>
         </table>

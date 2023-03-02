@@ -1,0 +1,22 @@
+<h1>Review Details</h1>
+<h2>Flight Details:</h2>
+Airlines: {{reservationData?.flight?.operatingAirlines}} <br/>
+Flight No: {{reservationData?.flight?.flightNumber}} <br/>
+Departure City: {{reservationData?.flight?.departureCity}} <br/>
+Arrival City: {{reservationData?.flight?.arrivalCity}} <br/>
+Date Of Departure: {{reservationData?.flight?.dateOfDeparture}} <br/>
+Estimated Departure Time: {{reservationData?.flight?.estimatedDepartureTime}} <br/>
+
+<h2>Passenger Details:</h2>
+First Name: {{reservationData?.passenger?.firstName}} <br/>
+Last Name: {{reservationData?.passenger?.lastName}} <br/>
+Middle Name: {{reservationData?.passenger?.middleName}} <br/>
+Email: {{reservationData?.passenger?.email}} <br/>
+Phone: {{reservationData?.passenger?.phone}} <br/>
+<br/>
+Enter the number of bags to check in:
+<form [formGroup]="checkInForm" (ngSubmit)="checkIn()">
+        Number of bags: <input type="text" name="numberOfBags" formControlName="numberOfBags"/>
+        <input type="submit" value="Check In">
+</form>
+

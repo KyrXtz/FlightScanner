@@ -10,5 +10,16 @@
         Arrival City: {{flightData?.arrivalCity}} <br/>
         Departure Date Time: {{flightData?.dateOfDeparture}} <br/>
 
+        <h2>Passenger Details</h2>
+        <form [formGroup]="passengerDetailsForm" (ngSubmit)="onSubmit()">
+            <pre>
+                First Name: <input type="text" name="firstName" formControlName="firstName"/>
+                Last Name: <input type="text" name="lastName" formControlName="lastName"/>
+                Middle Name: <input type="text" name="middleName" formControlName="middleName"/>
+                Email: <input type="text" name="email" formControlName="email"/>
+                Phone: <input type="text" name="passengerPhone" formControlName="passengerPhone"/>
+                <input type="submit" value="Book">
+            </pre>
+        </form>
     </body>
 </html>

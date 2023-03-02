@@ -17,6 +17,7 @@ export class DisplayFlightsComponent {
     this.flightsData = JSON.parse(state.flightsData);
   }
 
-  ngOnInit() {
+  onSelect(id:number):any{
+    this.router.navigate(['/passengerDetails',id]);
   }
 }
