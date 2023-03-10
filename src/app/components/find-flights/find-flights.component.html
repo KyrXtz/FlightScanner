@@ -1,15 +1,45 @@
-<h1>Book flight</h1>
-<html>
-    <head>
-        <title>Find Flights</title>
-    </head>
-    <body>
-        <h2>Find Flights:</h2>
-        <form [formGroup]="findFlightsForm" (ngSubmit)="onSubmit()">
-            From: <input type="text" name="from" formControlName="from"/>
-            To: <input type="text" name="to" formControlName="to"/>
-            Departure Date: <input type="text" name="departureDate" formControlName="departureDate"/>
-            <input type="submit" value="Search">
-        </form>
-    </body>
-</html>
+  <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-5 col-lg-6 col-md-12">
+      <h1 class="text-center mb-5">Book Flight</h1>
+      <form [formGroup]="findFlightsForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="from">From:</label>
+              <input type="text" class="form-control" name="from" formControlName="from" placeholder="Enter departure city" (keyup)="filterAirports($event)" autocomplete="off" >
+              <ul *ngIf="this.filteredAirports.length > 0 && currentControl == 'from'" class="list-group">
+                <li class="list-group-item" *ngFor="let airport of filteredAirports" (click)="selectAirport(airport)">
+                  {{ airport.code }} - {{ airport.name }}
+                  <br>
+                  <span class="list-small-item">{{ airport.country }}</span>   
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="to">To:</label>
+              <input type="text" class="form-control" name="to" formControlName="to" placeholder="Enter destination city" (keyup)="filterAirports($event)" autocomplete="off">
+              <ul *ngIf="this.filteredAirports.length > 0 && currentControl == 'to'" class="list-group">
+                <li class="list-group-item" *ngFor="let airport of filteredAirports" (click)="selectAirport(airport)">
+                  {{ airport.code }} - {{ airport.name }}
+                  <br>
+                  <span class="list-small-item">{{ airport.country }}</span>   
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="departureDate">Departure Date:</label>
+              <input type="text" class="form-control" name="departureDate" formControlName="departureDate" placeholder="Enter departure date">
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <button formControlName="submit" type="submit" class="btn btn-primary mt-3">Search Flights</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
