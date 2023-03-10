@@ -35,7 +35,13 @@ export class FindFlightsComponent {
       this.filteredAirports = this.airports.filter(airport =>
         (airport.name.toLowerCase().includes(query) || airport.code.toLowerCase().includes(query))
           && !selectedCodes.includes(airport.code)
-      );
+      ).sort((a, b) => {
+        const diffA = Math.abs(a.code.toLowerCase().indexOf(query) - query.length);
+        const diffB = Math.abs(b.code.toLowerCase().indexOf(query) - query.length);
+        return diffA - diffB;
+      }).sort((a, b) => {
+        return a.code.localeCompare(b.code);
+      });
     } else {
       this.filteredAirports = []; 
       this.currentControl = "";
