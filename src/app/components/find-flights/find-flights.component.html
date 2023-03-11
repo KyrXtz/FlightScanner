@@ -32,11 +32,11 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="departureDate">Departure Date:</label>
-              <input type="text" class="form-control" name="departureDate" formControlName="departureDate" placeholder="Enter departure date">
+              <input type="date" class="form-control" name="departureDate" formControlName="departureDate" placeholder="Enter departure date" min="{{minDate()}}" max="{{maxDate()}}" (change)="onDateSelected($event)">
             </div>
           </div>
           <div class="col-md-12 text-center">
-            <button formControlName="submit" type="submit" class="btn btn-primary mt-3">Search Flights</button>
+            <button type="submit" class="btn btn-primary mt-3">Search Flights</button>
           </div>
         </div>
       </form>
