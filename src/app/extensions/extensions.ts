@@ -1,11 +1,17 @@
-export {}
+import { HttpErrorResponse } from "@angular/common/http";
+import { throwError } from "rxjs";
 
-declare global {
-    interface String {
-      isNullOrEmptyOrUndefined(): boolean;
-    }
+export function isNullOrEmptyOrUndefined(value: string | undefined | null): boolean {
+  return value == null || value == "" || value == undefined;
+}
+
+export function handleError(error: HttpErrorResponse) {
+  if (error.error instanceof ErrorEvent) {
+    console.error('An error occurred:', error.error.message);
+  } else {
+    console.error(
+      `Backend returned code ${error.status}, ` +
+      `body was: ${error.error}`);
   }
-  
-  String.prototype.isNullOrEmptyOrUndefined = function() {
-    return this == null || this == "" || this == undefined;
-  };
+  return throwError(() => new Error('Something bad happened; please try again later.'));
+};

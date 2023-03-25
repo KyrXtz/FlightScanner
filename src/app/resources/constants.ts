@@ -1,0 +1,1 @@
+export const dbPath = "http://localhost:8080/flightservices/";

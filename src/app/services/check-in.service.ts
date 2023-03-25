@@ -1,21 +1,25 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, throwError } from 'rxjs';
+import { handleError } from '../extensions/extensions';
+import { dbPath } from '../resources/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckInService {
 
-  reservationtUri:string = "http://localhost:8080/flightservices/reservations";
+  reservationtUri:string;
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {
+    this.reservationtUri = dbPath+'reservations';
+   }
   
   public getReservation(id:number){
     return this._httpClient.get(this.reservationtUri+'/'+id)
     .pipe(
       map(response => response),
-      catchError(this.handleError)
+      catchError(handleError)
     );
   }
 
@@ -23,18 +27,8 @@ export class CheckInService {
     return this._httpClient.put(this.reservationtUri,checkInRequest)
     .pipe(
       map(response => response),
-      catchError(this.handleError)
+      catchError(handleError)
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
-  };
 }
