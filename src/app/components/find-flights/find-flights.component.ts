@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { ReservationService } from 'src/app/services/reservation.service';
-import { airports } from '../../resources/airports';
 import Swal from 'sweetalert2';
-import '../../extensions/extensions';
+import { isNullOrEmptyOrUndefined } from '../../extensions/extensions';
+import { LoadAirportsService } from 'src/app/services/load-airports.service';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-find-flights',
@@ -14,7 +15,7 @@ import '../../extensions/extensions';
 export class FindFlightsComponent {
 
   findFlightsForm:FormGroup;
-  airports: { code: string, name: string, country: string}[] = airports;
+  airports: { code: string, name: string, country: string}[] = [];
   filteredAirports: { code: string, name: string, country: string }[] = [];
   selectedAirports: { code: string, name: string, country: string }[] = [];
 
@@ -23,17 +24,36 @@ export class FindFlightsComponent {
   minDepartureDate: Date;
   maxDepartureDate: Date;
 
-  constructor(private formBuilder: FormBuilder, private reservationService:ReservationService, private router:Router) { 
-   this.findFlightsForm = this.formBuilder.group({
-     'from' : ['',Validators.required],
-     'to' : ['',Validators.required],
-     'departureDate': ['',Validators.required]
-   })
+  constructor(private formBuilder: FormBuilder,
+    private reservationService:ReservationService,
+    private airportsService:LoadAirportsService,
+    private router:Router) { 
+      this.airportsService.getAirports()
+        .pipe(
+          map((response: any) => 
+            response.map((airport: { code: string; name: string; country: string }) => {
+              return {
+                code: airport.code,
+                name: airport.name,
+                country: airport.country
+              };
+            })
+          )
+        )
+        .subscribe((airports: Array<{ code: string; name: string; country: string }>) => {
+          this.airports = airports;
+        });
 
-    this.minDepartureDate = new Date();
-    this.maxDepartureDate = new Date();
-    this.maxDepartureDate.setMonth(this.minDepartureDate.getMonth() + 3);
-    this.findFlightsForm.get('departureDate')?.setValue(this.formatDate(this.minDepartureDate));
+      this.findFlightsForm = this.formBuilder.group({
+        'from' : ['',Validators.required],
+        'to' : ['',Validators.required],
+        'departureDate': ['',Validators.required]
+      })
+
+      this.minDepartureDate = new Date();
+      this.maxDepartureDate = new Date();
+      this.maxDepartureDate.setMonth(this.minDepartureDate.getMonth() + 3);
+      this.findFlightsForm.get('departureDate')?.setValue(this.formatDate(this.minDepartureDate));
   }
 
   filterAirports(event: any) {
@@ -62,7 +82,6 @@ export class FindFlightsComponent {
     let control = this.findFlightsForm.get(this.currentControl);
     control!.setValue(`${airport.code} - ${airport.name}`); 
     control!.disable();
-
     this.selectedAirports.push({ code: airport.code, name: airport.name, country: airport.country });
 
     this.filteredAirports = []; 
@@ -91,16 +110,21 @@ export class FindFlightsComponent {
   }
   
   onSubmit(){
-    let data = this.findFlightsForm.value;
-    if(data?.from?.isNullOrEmptyOrUndefined() || data?.to?.isNullOrEmptyOrUndefined() || data?.departureDate?.isNullOrEmptyOrUndefined()){
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill out all 3 fields!',
-      });
-      return;
+    let from = this.findFlightsForm.get('from')?.value.substring(0, 3);
+    let to = this.findFlightsForm.get('to')?.value.substring(0, 3);
+    let departureDate = this.findFlightsForm.get('departureDate')?.value;
+
+    if (isNullOrEmptyOrUndefined(from) ||
+      isNullOrEmptyOrUndefined(to) ||
+      isNullOrEmptyOrUndefined(departureDate)){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please fill out all 3 fields!',
+        });
+        return;
     }
-    this.reservationService.getFlights(data.from, data.to, data.departureDate).subscribe(
+    this.reservationService.getFlights(from, to, departureDate).subscribe(
       flightsData =>{
         let navigationExtras: NavigationExtras = {
           state: {

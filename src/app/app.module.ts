@@ -19,6 +19,7 @@ import { CheckInService } from './services/check-in.service';
 import { LoadingIndicatorService } from './services/loading-indicator.service';
 import { LoadingIndicatorInterceptor } from './interceptors/LoadingIndicatorInterceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadAirportsService } from './services/load-airports.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReservationService,
     CheckInService,
     LoadingIndicatorService,
+    LoadAirportsService,
     {
       provide: HTTP_INTERCEPTORS,
       useFactory: (service: LoadingIndicatorService) => new LoadingIndicatorInterceptor(service),
