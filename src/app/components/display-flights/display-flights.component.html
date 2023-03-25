@@ -1,27 +1,26 @@
-<html>
-    <head>
-        <title>Available Flights</title>
-    </head>
-    <body>
-        <h2>Available Flights:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Airlines</th>
-                    <th>Departure City</th>
-                    <th>Arrival City</th>
-                    <th>Departure Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let flight of flightsData">
-                    <td>{{flight?.operatingAirlines}}</td>
-                    <td>{{flight?.departureCity}}</td>
-                    <td>{{flight?.arrivalCity}}</td>
-                    <td>{{flight?.estimatedDepartureTime}}</td>
-                    <td><a (click)="onSelect(flight.id)">Select</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
-</html>
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-5 col-lg-8 col-md-12">
+      <h1 class="text-center mb-5">Available Flights</h1>
+      <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Airlines</th>
+            <th>Departure City</th>
+            <th>Arrival City</th>
+            <th>Departure Date</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flight of flightsData">
+            <td>{{flight?.operatingAirlines}}</td>
+            <td>{{flight?.departureCity}}</td>
+            <td>{{flight?.arrivalCity}}</td>
+            <td>{{flight?.estimatedDepartureTime}}</td>
+            <td><button class="btn btn-primary" (click)="onSelect(flight.id)">Select</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -15,6 +15,7 @@ export class DisplayFlightsComponent {
       flightsData: string
     };
     this.flightsData = JSON.parse(state.flightsData);
+    console.log(this.flightsData);
   }
 
   onSelect(id:number):any{
