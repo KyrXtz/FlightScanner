@@ -20,6 +20,8 @@ import { LoadingIndicatorService } from './services/loading-indicator.service';
 import { LoadingIndicatorInterceptor } from './interceptors/LoadingIndicatorInterceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadAirportsService } from './services/load-airports.service';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { LoadAirportsService } from './services/load-airports.service';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FontAwesomeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -58,4 +61,8 @@ import { LoadAirportsService } from './services/load-airports.service';
    ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+ }

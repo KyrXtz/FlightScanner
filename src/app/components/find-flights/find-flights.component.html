@@ -6,7 +6,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="from">From:</label>
-              <input type="text" class="form-control" name="from" formControlName="from" placeholder="Enter departure city" (keyup)="filterAirports($event)" autocomplete="off" >
+              <div class="input-group">
+                <input type="text" class="form-control" name="from" formControlName="from" placeholder="Enter departure city" (keyup)="filterAirports($event)" autocomplete="off">
+                <div class="input-group-append">
+                  <button *ngIf="showClearButton('from')" type="button" class="btn btn-outline-secondary clear-button" (click)="clearAirport('from')">
+                    <fa-icon icon="times-circle"></fa-icon>
+                  </button>
+                </div>
+              </div>
               <ul *ngIf="this.filteredAirports.length > 0 && currentControl == 'from'" class="list-group">
                 <li class="list-group-item" *ngFor="let airport of filteredAirports" (click)="selectAirport(airport)">
                   {{ airport.code }} - {{ airport.name }}
@@ -18,8 +25,14 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="to">To:</label>
-              <input type="text" class="form-control" name="to" formControlName="to" placeholder="Enter destination city" (keyup)="filterAirports($event)" autocomplete="off">
+              <label for="to">To:</label><div class="input-group">
+                <input type="text" class="form-control" name="to" formControlName="to" placeholder="Enter destination city" (keyup)="filterAirports($event)" autocomplete="off">
+                <div class="input-group-append">
+                  <button *ngIf="showClearButton('to')" type="button" class="btn btn-outline-secondary clear-button" (click)="clearAirport('to')">
+                    <fa-icon icon="times-circle"></fa-icon>
+                  </button>
+                </div>
+              </div>
               <ul *ngIf="this.filteredAirports.length > 0 && currentControl == 'to'" class="list-group">
                 <li class="list-group-item" *ngFor="let airport of filteredAirports" (click)="selectAirport(airport)">
                   {{ airport.code }} - {{ airport.name }}

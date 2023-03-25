@@ -37,7 +37,7 @@
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+  border-radius: 0.25rem !important; 
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -122,4 +122,30 @@ input[disabled] {
   .card {
     margin-top: 3rem;
   }
+}
+
+.clear-button {
+  position: absolute;
+  top: 0.175rem;
+  right: 0.375rem;
+  font-size: 1.5rem;
+  background-color: gray;
+  border: none;
+  padding: 0;
+  width: 2rem; 
+  height: 2rem; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer;
+}
+
+
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  padding-right: 2.5rem; 
 }

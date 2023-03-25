@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { isNullOrEmptyOrUndefined } from '../../extensions/extensions';
 import { LoadAirportsService } from 'src/app/services/load-airports.service';
 import { filter, map } from 'rxjs';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-find-flights',
@@ -24,10 +25,13 @@ export class FindFlightsComponent {
   minDepartureDate: Date;
   maxDepartureDate: Date;
 
+  faTimesCircle: any;
   constructor(private formBuilder: FormBuilder,
     private reservationService:ReservationService,
     private airportsService:LoadAirportsService,
-    private router:Router) { 
+    private router:Router) {     
+      this.faTimesCircle = faCoffee;
+
       this.airportsService.getAirports()
         .pipe(
           map((response: any) => 
@@ -86,6 +90,18 @@ export class FindFlightsComponent {
 
     this.filteredAirports = []; 
     this.currentControl = "";
+  }
+
+  clearAirport(controlName: string) {
+    const control = this.findFlightsForm.get(controlName);
+    this.selectedAirports = this.selectedAirports.filter(airport => airport.code !== control?.value.substring(0, 3));
+    control!.enable();
+    control!.setValue('');
+  }
+  
+  showClearButton(controlName: string): boolean {
+    const control = this.findFlightsForm.get(controlName);
+    return control!.disabled;
   }
 
   minDate(): string {
