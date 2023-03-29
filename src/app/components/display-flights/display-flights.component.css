@@ -41,8 +41,19 @@
   th {
     font-weight: 600;
   }
-  
+  tr{
+    cursor: pointer;
+  }  
   tr:nth-child(even) {
     background-color: #f8f9fa;
   }
-  
+  .selected {
+    background-color: #b3d4ff;
+    color: black;
+  }
+  tr.selected {
+    background-color: #b3d4ff;
+    color: black;
+    cursor: default;
+  }
+
