@@ -26,34 +26,34 @@
         <h2 class="mt-4">Passenger Details</h2>
         <form [formGroup]="passengerDetailsForm" (ngSubmit)="onSubmit()" class="mt-3">
           <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" class="form-control" name="firstName" formControlName="firstName"/>
+            <label for="passengerFirstName">First Name:</label>
+            <input type="text" id="passengerFirstName" class="form-control" name="passengerFirstName" formControlName="passengerFirstName"/>
           </div>
-          <div *ngIf="passengerDetailsForm.get('firstName')?.touched && passengerDetailsForm.get('firstName')?.errors?.['required']" class="alert alert-danger">
+          <div *ngIf="passengerDetailsForm.get('passengerFirstName')?.touched && passengerDetailsForm.get('passengerFirstName')?.errors?.['required']" class="alert alert-danger">
             First Name is required!
           </div>
         
           <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" class="form-control" name="lastName" formControlName="lastName"/>
+            <label for="passengerLastName">Last Name:</label>
+            <input type="text" id="passengerLastName" class="form-control" name="passengerLastName" formControlName="passengerLastName"/>
           </div>
-          <div *ngIf="passengerDetailsForm.get('lastName')?.touched && passengerDetailsForm.get('lastName')?.errors?.['required']" class="alert alert-danger">
+          <div *ngIf="passengerDetailsForm.get('passengerLastName')?.touched && passengerDetailsForm.get('passengerLastName')?.errors?.['required']" class="alert alert-danger">
             Last Name is required!
           </div>
         
           <div class="form-group">
             <label for="middleName">Middle Name:</label>
-            <input type="text" id="middleName" class="form-control" name="middleName" formControlName="middleName"/>
+            <input type="text" id="passengerMiddleName" class="form-control" name="passengerMiddleName" formControlName="passengerMiddleName"/>
           </div>
         
           <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" id="email" class="form-control" name="email" formControlName="email"/>
+            <label for="passengerEmail">Email:</label>
+            <input type="text" id="passengerEmail" class="form-control" name="passengerEmail" formControlName="passengerEmail"/>
           </div>
-          <div *ngIf="passengerDetailsForm.get('email')?.touched && passengerDetailsForm.get('email')?.errors?.['required']" class="alert alert-danger">
+          <div *ngIf="passengerDetailsForm.get('passengerEmail')?.touched && passengerDetailsForm.get('passengerEmail')?.errors?.['required']" class="alert alert-danger">
             Email is required!
           </div>
-          <div *ngIf="passengerDetailsForm.get('email')?.touched && passengerDetailsForm.get('email')?.errors?.['email']" class="alert alert-danger">
+          <div *ngIf="passengerDetailsForm.get('passengerEmail')?.touched && passengerDetailsForm.get('passengerEmail')?.errors?.['email']" class="alert alert-danger">
             Email is not valid!
           </div>
         
@@ -61,8 +61,17 @@
             <label for="passengerPhone">Phone:</label>
             <input type="text" id="passengerPhone" class="form-control" name="passengerPhone" formControlName="passengerPhone"/>
           </div>
-          <div *ngIf="passengerDetailsForm.get('passengerPhone')?.touched && passengerDetailsForm.get('passengerPhone')?.errors?.['required']" class="alert alert-danger">
+          <div *ngIf="passengerDetailsForm.get('passengerPhone')?.touched && (passengerDetailsForm.get('passengerPhone')?.errors?.['required'])" class="alert alert-danger">
             Phone number is required!
+          </div>
+          <div *ngIf="passengerDetailsForm.get('passengerPhone')?.touched && passengerDetailsForm.get('passengerPhone')?.errors?.['minlength']" class="alert alert-danger">
+            Phone number is invalid!
+          </div>
+          <div *ngIf="passengerDetailsForm.get('passengerPhone')?.touched && passengerDetailsForm.get('passengerPhone')?.errors?.['maxlength']" class="alert alert-danger">
+            Phone number is invalid!
+          </div>
+          <div *ngIf="passengerDetailsForm.get('passengerPhone')?.touched && passengerDetailsForm.get('passengerPhone')?.errors?.['pattern']" class="alert alert-danger">
+            Phone number is invalid!
           </div>
           <button type="submit" class="btn btn-primary mt-3" [disabled]="passengerDetailsForm.invalid">Book</button>
         </form>

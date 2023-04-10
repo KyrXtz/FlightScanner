@@ -44,10 +44,10 @@ export class PassengerDetailsComponent {
     });
     
     this.passengerDetailsForm = this.formBuilder.group({
-      'firstName': ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]],
-      'lastName': ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]],
-      'middleName': ['', [Validators.minLength(2), Validators.pattern(/^[a-zA-Z]*$/)]],
-      'email': ['', [Validators.required, Validators.email]],
+      'passengerFirstName': ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]],
+      'passengerLastName': ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]],
+      'passengerMiddleName': ['', [Validators.pattern(/^[a-zA-Z]*$/)]],
+      'passengerEmail': ['', [Validators.required, Validators.email]],
       'passengerPhone': ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern(/^[0-9]+$/)]],
     });    
 
