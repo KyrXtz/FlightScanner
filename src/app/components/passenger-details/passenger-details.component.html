@@ -1,25 +1,73 @@
-<html>
-    <head>
-        <title>Complete Reservation</title>
-    </head>
-    <body>
-        <h2>Complete Reservation:</h2>
-        <h3>Flight Details:</h3>
-        Airline: {{flightData?.operatingAirlines}} <br/>
-        Departure City: {{flightData?.departureCity}} <br/>
-        Arrival City: {{flightData?.arrivalCity}} <br/>
-        Departure Date Time: {{flightData?.dateOfDeparture}} <br/>
-
-        <h2>Passenger Details</h2>
-        <form [formGroup]="passengerDetailsForm" (ngSubmit)="onSubmit()">
-            <pre>
-                First Name: <input type="text" name="firstName" formControlName="firstName"/>
-                Last Name: <input type="text" name="lastName" formControlName="lastName"/>
-                Middle Name: <input type="text" name="middleName" formControlName="middleName"/>
-                Email: <input type="text" name="email" formControlName="email"/>
-                Phone: <input type="text" name="passengerPhone" formControlName="passengerPhone"/>
-                <input type="submit" value="Book">
-            </pre>
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-5 col-lg-8 col-md-12">
+      <h1 class="text-center mb-5">Complete Reservation</h1>
+      <div class="flight-details">
+        <h2>Flight Details:</h2>
+        <table class="table table-borderless">
+          <tr>
+            <th>Airline</th>
+            <td>{{flightData?.operatingAirlines}}</td>
+          </tr>
+          <tr>
+            <th>Departure City</th>
+            <td>{{flightData?.departureCity}}</td>
+          </tr>
+          <tr>
+            <th>Arrival City</th>
+            <td>{{flightData?.arrivalCity}}</td>
+          </tr>
+          <tr>
+            <th>Departure Date Time</th>
+            <td>{{formatDate(flightData?.estimatedDepartureTime)}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="flight-details">
+        <h2 class="mt-4">Passenger Details</h2>
+        <form [formGroup]="passengerDetailsForm" (ngSubmit)="onSubmit()" class="mt-3">
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" class="form-control" name="firstName" formControlName="firstName"/>
+          </div>
+          <div *ngIf="passengerDetailsForm.get('firstName')?.touched && passengerDetailsForm.get('firstName')?.errors?.['required']" class="alert alert-danger">
+            First Name is required!
+          </div>
+        
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" class="form-control" name="lastName" formControlName="lastName"/>
+          </div>
+          <div *ngIf="passengerDetailsForm.get('lastName')?.touched && passengerDetailsForm.get('lastName')?.errors?.['required']" class="alert alert-danger">
+            Last Name is required!
+          </div>
+        
+          <div class="form-group">
+            <label for="middleName">Middle Name:</label>
+            <input type="text" id="middleName" class="form-control" name="middleName" formControlName="middleName"/>
+          </div>
+        
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" class="form-control" name="email" formControlName="email"/>
+          </div>
+          <div *ngIf="passengerDetailsForm.get('email')?.touched && passengerDetailsForm.get('email')?.errors?.['required']" class="alert alert-danger">
+            Email is required!
+          </div>
+          <div *ngIf="passengerDetailsForm.get('email')?.touched && passengerDetailsForm.get('email')?.errors?.['email']" class="alert alert-danger">
+            Email is not valid!
+          </div>
+        
+          <div class="form-group">
+            <label for="passengerPhone">Phone:</label>
+            <input type="text" id="passengerPhone" class="form-control" name="passengerPhone" formControlName="passengerPhone"/>
+          </div>
+          <div *ngIf="passengerDetailsForm.get('passengerPhone')?.touched && passengerDetailsForm.get('passengerPhone')?.errors?.['required']" class="alert alert-danger">
+            Phone number is required!
+          </div>
+          <button type="submit" class="btn btn-primary mt-3" [disabled]="passengerDetailsForm.invalid">Book</button>
         </form>
-    </body>
-</html>
+        
+    </div>
+    </div>
+  </div>
+  
