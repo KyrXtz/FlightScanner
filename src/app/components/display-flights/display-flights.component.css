@@ -56,4 +56,6 @@
     color: black;
     cursor: default;
   }
-
+  .header-row {
+    cursor: default;
+  }
