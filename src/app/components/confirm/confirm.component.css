@@ -1,0 +1,41 @@
+.container-fluid {
+    height: 100vh;
+    padding-top: 60px;
+  }
+  
+  .card {
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .card {
+      max-width: 600px;
+    }
+  }
+  
+  .card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  .card h2 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .confirmation-details {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    margin-bottom: 30px;
+  }
+  
