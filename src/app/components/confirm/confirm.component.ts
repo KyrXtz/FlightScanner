@@ -8,12 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ConfirmComponent {
 
-  reservationId : number = 0;
+  reservationId : String = "";
 
   constructor( private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe(params =>{
       if(params['id']){
-        this.reservationId = Number.parseInt(params['id']);
+        this.reservationId = params['id'];
       }
     })
   }

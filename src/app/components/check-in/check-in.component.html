@@ -1,22 +1,66 @@
-<h1>Review Details</h1>
-<h2>Flight Details:</h2>
-Airlines: {{reservationData?.flight?.operatingAirlines}} <br/>
-Flight No: {{reservationData?.flight?.flightNumber}} <br/>
-Departure City: {{reservationData?.flight?.departureCity}} <br/>
-Arrival City: {{reservationData?.flight?.arrivalCity}} <br/>
-Date Of Departure: {{reservationData?.flight?.dateOfDeparture}} <br/>
-Estimated Departure Time: {{reservationData?.flight?.estimatedDepartureTime}} <br/>
-
-<h2>Passenger Details:</h2>
-First Name: {{reservationData?.passenger?.firstName}} <br/>
-Last Name: {{reservationData?.passenger?.lastName}} <br/>
-Middle Name: {{reservationData?.passenger?.middleName}} <br/>
-Email: {{reservationData?.passenger?.email}} <br/>
-Phone: {{reservationData?.passenger?.phone}} <br/>
-<br/>
-Enter the number of bags to check in:
-<form [formGroup]="checkInForm" (ngSubmit)="checkIn()">
-        Number of bags: <input type="text" name="numberOfBags" formControlName="numberOfBags"/>
-        <input type="submit" value="Check In">
-</form>
-
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+        <div class="card p-5 col-lg-8 col-md-12">
+          <h1 class="text-center mb-5">Review Details</h1>
+          <div class="flight-details">
+            <h2>Flight Details:</h2>
+            <table class="table table-borderless">
+              <tr>
+                <th>Airlines</th>
+                <td>{{reservationData?.flight?.operatingAirlines}}</td>
+              </tr>
+              <tr>
+                <th>Flight No</th>
+                <td>{{reservationData?.flight?.flightNumber}}</td>
+              </tr>
+              <tr>
+                <th>Departure City</th>
+                <td>{{reservationData?.flight?.departureCity}}</td>
+              </tr>
+              <tr>
+                <th>Arrival City</th>
+                <td>{{reservationData?.flight?.arrivalCity}}</td>
+              </tr>
+              <tr>
+                <th>Departure Date Time</th>
+                <td>{{formatDate(reservationData?.flight?.estimatedDepartureTime)}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="flight-details">
+            <h2 class="mt-4">Passenger Details</h2>
+            <table class="table table-borderless">
+              <tr>
+                <th>First Name</th>
+                <td>{{reservationData?.passenger?.firstName}}</td>
+              </tr>
+              <tr>
+                <th>Last Name</th>
+                <td>{{reservationData?.passenger?.lastName}}</td>
+              </tr>
+              <tr *ngIf="reservationData?.passenger?.middleName">
+                <th>Middle Name</th>
+                <td>{{reservationData?.passenger?.middleName}}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{reservationData?.passenger?.email}}</td>
+              </tr>
+              <tr>
+                <th>Phone</th>
+                <td>{{reservationData?.passenger?.phone}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="baggage-check-in">
+            <h2 class="mt-4">Baggage Check-in</h2>
+            <form [formGroup]="checkInForm" (ngSubmit)="checkIn()" class="mt-3">
+              <div class="form-group">
+                <label for="numberOfBags">Number of bags:</label>
+                <input type="text" id="numberOfBags" class="form-control" name="numberOfBags" formControlName="numberOfBags"/>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Check In</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      

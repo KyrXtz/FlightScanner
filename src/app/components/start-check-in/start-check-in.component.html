@@ -1,4 +1,18 @@
-
-<h1>Enter the reservation Id</h1>
-<input type="text" [(ngModel)]="reservationId"/>
-<button (click)="onClick(reservationId)">Next</button>
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-5 col-lg-6 col-md-12">
+        <h1 class="text-center mb-5">Enter the 6-digit reservation code</h1>
+      <form (ngSubmit)="onClick(reservationId)">
+        <div class="row">
+          <div class="col-6 mx-auto">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="reservationId" name="reservationId" placeholder="Enter reservation Id">
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary mt-3">Next</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

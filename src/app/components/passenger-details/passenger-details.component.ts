@@ -56,7 +56,7 @@ export class PassengerDetailsComponent {
     this.passengerDetailsForm.value.flightId = this.flightData.id;
 
     this.reservationService.saveReservation(this.passengerDetailsForm.value).subscribe((res: any) => {
-      this.router.navigate(['/confirm', res.id])
+      this.router.navigate(['/confirm', res.encryptedId])
     })
     console.log(this.passengerDetailsForm.value);
   }
