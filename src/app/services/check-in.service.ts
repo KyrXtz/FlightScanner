@@ -19,7 +19,7 @@ export class CheckInService {
     return this._httpClient.get(this.reservationtUri+'/'+id)
     .pipe(
       map(response => response),
-      catchError(handleError)
+      catchError((error) => handleError(error, 'Failed to get reservation. Please check the reservation code and try again.'))
     );
   }
 
@@ -27,7 +27,7 @@ export class CheckInService {
     return this._httpClient.put(this.reservationtUri,checkInRequest)
     .pipe(
       map(response => response),
-      catchError(handleError)
+      catchError((error) => handleError(error, undefined))
     );
   }
 

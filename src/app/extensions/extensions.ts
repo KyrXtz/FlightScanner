@@ -6,7 +6,7 @@ export function isNullOrEmptyOrUndefined(value: string | undefined | null): bool
   return value == null || value == "" || value == undefined;
 }
 
-export function handleError(error: HttpErrorResponse) {
+export function handleError(error: HttpErrorResponse, message?: string) {
   if (error.error instanceof ErrorEvent) {
     console.error('An error occurred:', error.error.message);
   } else {
@@ -17,7 +17,7 @@ export function handleError(error: HttpErrorResponse) {
   Swal.fire({
     icon: 'error',
     title: 'Oops...',
-    text: 'Connection error! Try refreshing the page',
+    text:  typeof message !== 'undefined' ? message :'Connection error! Try refreshing the page',
   });
   return throwError(() => new Error('Something bad happened; please try again later.'));
 };

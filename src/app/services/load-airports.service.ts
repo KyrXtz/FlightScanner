@@ -27,7 +27,7 @@ export class LoadAirportsService {
         this.airportsCache = response;
         return response;
       }),
-      catchError(handleError)
+      catchError((error) => handleError(error, undefined))
     );
   }
 }

@@ -21,7 +21,7 @@ export class ReservationService {
     return this._httpClient.get(this.flightUri+"?from="+from+"&to="+to+"&departureDate="+departureDate)
     .pipe(
       map(response => response),
-      catchError(handleError)
+      catchError((error) => handleError(error, undefined))
     );
   }
 
@@ -29,7 +29,7 @@ export class ReservationService {
     return this._httpClient.get(this.flightUri+"/"+id)
     .pipe(
       map(response => response),
-      catchError(handleError)
+      catchError((error) => handleError(error, undefined))
     );
   }
 
@@ -37,7 +37,7 @@ export class ReservationService {
     return this._httpClient.post(this.reservationtUri,reservation)
     .pipe(
       map(response => response),
-      catchError(handleError)
+      catchError((error) => handleError(error, undefined))
     );
   }
 }
