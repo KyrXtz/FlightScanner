@@ -104,12 +104,16 @@ export class FindFlightsComponent {
     return control!.disabled;
   }
 
-  minDate(): string {
-    return this.formatDate(this.minDepartureDate);
+  getStartOfMonth(): string {
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    return startOfMonth.toISOString().split('T')[0];
   }
-
-  maxDate(): string {
-    return this.formatDate(this.maxDepartureDate);
+  
+  getEndOfMonth(): string {
+    const now = new Date();
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    return endOfMonth.toISOString().split('T')[0];
   }
 
   onDateSelected(event: any): void {
@@ -124,7 +128,18 @@ export class FindFlightsComponent {
     let day = `${date.getDate()}`.padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
-  
+
+  onDateFocus(): void {
+    if (sessionStorage.getItem('firstClick') === null) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Hey!',
+        text: 'Please note that the free plan of the Aviation Flights Data API is being used, so only flights for the current month are available!',
+      });
+      sessionStorage.setItem('firstClick', 'false');
+    }
+  }
+
   onSubmit(){
     let from = this.findFlightsForm.get('from')?.value.substring(0, 3);
     let to = this.findFlightsForm.get('to')?.value.substring(0, 3);
