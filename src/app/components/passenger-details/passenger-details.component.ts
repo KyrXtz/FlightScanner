@@ -16,6 +16,9 @@ export class PassengerDetailsComponent {
 
   flightData: any;
   passengerDetailsForm: FormGroup;
+  flightsData: string ="";
+  from: string = "";
+  to: string = "";
 
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router, private reservationService: ReservationService, private airportsService: LoadAirportsService, private datePipe: DatePipe) {
     this.activatedRoute.params.subscribe(params => {
@@ -42,7 +45,18 @@ export class PassengerDetailsComponent {
         });
       }
     });
-    
+
+    const navigation = this.router.getCurrentNavigation();
+        const state = navigation?.extras.state as {
+          flightsData: string,
+          from: string,
+          to: string
+        };
+
+    this.flightsData = state.flightsData;
+    this.from = state.from;
+    this.to = state.to;
+
     this.passengerDetailsForm = this.formBuilder.group({
       'passengerFirstName': ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]],
       'passengerLastName': ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z]+$/)]],
@@ -62,5 +76,14 @@ export class PassengerDetailsComponent {
   }
   formatDate(dateString: string): string {
     return this.datePipe.transform(dateString, 'MMMM d, y, h:mm a') ?? "N/A";
+  }
+  goBack(): void {
+    this.router.navigate(['/displayFlights'], {
+      state: { 
+        flightsData: this.flightsData,
+        from: this.from,
+        to: this.to
+      }
+    });
   }
 }

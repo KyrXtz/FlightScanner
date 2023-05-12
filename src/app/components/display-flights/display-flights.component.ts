@@ -13,6 +13,8 @@ import { LoadAirportsService } from 'src/app/services/load-airports.service';
 export class DisplayFlightsComponent {
   flightsData: any;
   selectedFlightId: number = 0;
+  from: string = "";
+  to: string = "";
 
   constructor(private router: Router, private datePipe: DatePipe, private airportsService: LoadAirportsService) {
     this.airportsService.getAirports()
@@ -30,10 +32,15 @@ export class DisplayFlightsComponent {
       .subscribe((airportsSelected: Array<{ code: string; name: string; country: string }>) => {
         const navigation = this.router.getCurrentNavigation();
         const state = navigation?.extras.state as {
-          flightsData: string
+          flightsData: string,
+          from: string,
+          to: string
         };
-        
-        const rawFlightsData = JSON.parse(state.flightsData);
+
+        this.from = state.from;
+        this.to = state.to;
+
+        const rawFlightsData = JSON.parse(state.flightsData);    
         this.flightsData = rawFlightsData.map((flight: any) => {
           const departureAirport = airportsSelected.find(airport => airport.code === flight.departureCity);
           const arrivalAirport = airportsSelected.find(airport => airport.code === flight.arrivalCity);
@@ -49,11 +56,22 @@ export class DisplayFlightsComponent {
   
 
   onSelect(id: number): any {
-    this.router.navigate(['/passengerDetails', id]);
+    this.router.navigate(['/passengerDetails', id], {
+      state: { 
+        flightsData: JSON.stringify(this.flightsData),
+        from: this.from,
+        to: this.to
+      }
+    });
   }
 
-  goBack(): void {
-    this.router.navigate(['/findFlights']);
+  goBack(): void {  
+    this.router.navigate(['/findFlights'], {
+      state: { 
+        from: this.from,
+        to: this.to
+      }
+    });
   }
 
   formatDate(dateString: string): string {

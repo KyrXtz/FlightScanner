@@ -54,6 +54,20 @@ export class FindFlightsComponent {
         'departureDate': ['',Validators.required]
       })
 
+      const navigation = this.router.getCurrentNavigation();
+      const state = navigation?.extras.state as {from: string, to: string};
+      if (state) {
+        if(state.from !== ''){
+          this.findFlightsForm.get('from')?.setValue(state.from);
+          this.findFlightsForm.get('from')?.disable();
+        }
+        
+        if(state.to !== ''){
+          this.findFlightsForm.get('to')?.setValue(state.to);
+          this.findFlightsForm.get('to')?.disable();
+        }
+      }
+
       this.minDepartureDate = this.getTomorrow();
       this.maxDepartureDate = this.getEndOfMonth()
       this.findFlightsForm.get('departureDate')?.setValue(this.formatDate(this.minDepartureDate));
@@ -156,12 +170,12 @@ export class FindFlightsComponent {
     }
     this.reservationService.getFlights(from, to, departureDate).subscribe(
       flightsData =>{
-        let navigationExtras: NavigationExtras = {
+        this.router.navigate(['/displayFlights'], {
           state: {
-            flightsData: JSON.stringify(flightsData)
-          }
-        };
-        this.router.navigate(['/displayFlights'], navigationExtras);
+            flightsData: JSON.stringify(flightsData),
+            from: this.findFlightsForm.get('from')?.value,
+            to: this.findFlightsForm.get('to')?.value
+        }});
       }
     );
   }
