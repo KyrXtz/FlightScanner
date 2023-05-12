@@ -1,66 +1,104 @@
 <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
-        <div class="card p-5 col-lg-8 col-md-12">
-          <h1 class="text-center mb-5">Review Details</h1>
-          <div class="flight-details">
-            <h2>Flight Details:</h2>
-            <table class="table table-borderless">
-              <tr>
-                <th>Airlines</th>
-                <td>{{reservationData?.flight?.operatingAirlines}}</td>
-              </tr>
-              <tr>
-                <th>Flight No</th>
-                <td>{{reservationData?.flight?.flightNumber}}</td>
-              </tr>
-              <tr>
-                <th>Departure City</th>
-                <td>{{reservationData?.flight?.departureCity}}</td>
-              </tr>
-              <tr>
-                <th>Arrival City</th>
-                <td>{{reservationData?.flight?.arrivalCity}}</td>
-              </tr>
-              <tr>
-                <th>Departure Date Time</th>
-                <td>{{formatDate(reservationData?.flight?.estimatedDepartureTime)}}</td>
-              </tr>
-            </table>
-          </div>
-          <div class="flight-details">
-            <h2 class="mt-4">Passenger Details</h2>
-            <table class="table table-borderless">
-              <tr>
-                <th>First Name</th>
-                <td>{{reservationData?.passenger?.firstName}}</td>
-              </tr>
-              <tr>
-                <th>Last Name</th>
-                <td>{{reservationData?.passenger?.lastName}}</td>
-              </tr>
-              <tr *ngIf="reservationData?.passenger?.middleName">
-                <th>Middle Name</th>
-                <td>{{reservationData?.passenger?.middleName}}</td>
-              </tr>
-              <tr>
-                <th>Email</th>
-                <td>{{reservationData?.passenger?.email}}</td>
-              </tr>
-              <tr>
-                <th>Phone</th>
-                <td>{{reservationData?.passenger?.phone}}</td>
-              </tr>
-            </table>
-          </div>
-          <div class="baggage-check-in">
-            <h2 class="mt-4">Baggage Check-in</h2>
-            <form [formGroup]="checkInForm" (ngSubmit)="checkIn()" class="mt-3">
-              <div class="form-group">
-                <label for="numberOfBags">Number of bags:</label>
-                <input type="text" id="numberOfBags" class="form-control" name="numberOfBags" formControlName="numberOfBags"/>
-              </div>
-              <button type="submit" class="btn btn-primary mt-3">Check In</button>
-            </form>
-          </div>
+  <div class="card p-5 col-lg-8 col-md-12">
+    <h1 class="text-center mb-5">Review Details</h1>
+    <div class="flight-details">
+      <h2>Flight Details</h2>
+      <br>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Airlines</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.flight?.operatingAirlines}}
         </div>
       </div>
-      
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Flight Number</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.flight?.flightNumber}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Departure Airport</p>
+        </div>
+        <div class="col-6 text-right">
+          {{getCity(reservationData?.flight?.departureCity)}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Arrival Airport</p>
+        </div>
+        <div class="col-6 text-right">
+          {{getCity(reservationData?.flight?.arrivalCity)}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Departure Date Time</p>
+        </div>
+        <div class="col-6 text-right">
+          {{formatDate(reservationData?.flight?.estimatedDepartureTime)}}
+        </div>
+      </div>
+    </div>
+    <div class="flight-details">
+      <h2>Passenger Details</h2>
+      <br>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>First Name</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.passenger?.firstName}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Last Name</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.passenger?.lastName}}
+        </div>
+      </div>
+      <div class="row mb-3" *ngIf="reservationData?.passenger?.middleName">
+        <div class="col-6 header-text">
+          <p>Middle Name</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.passenger?.middleName}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Email</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.passenger?.email}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 header-text">
+          <p>Phone</p>
+        </div>
+        <div class="col-6 text-right">
+          {{reservationData?.passenger?.phone}}
+        </div>
+      </div>
+    </div>
+    <div class="baggage-check-in">
+      <h2 class="mt-4">Baggage Check-in</h2>
+      <form [formGroup]="checkInForm" (ngSubmit)="checkIn()" class="mt-3">
+        <div class="form-group">
+          <label for="numberOfBags">Number of bags:</label>
+          <input type="text" id="numberOfBags" class="form-control" name="numberOfBags" formControlName="numberOfBags"/>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="checkInForm.invalid">Check In</button>
+      </form>
+    </div>
+  </div>
+</div>
+

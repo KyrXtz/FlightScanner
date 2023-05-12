@@ -70,4 +70,10 @@
   ::-webkit-scrollbar-thumb:hover {
     background-color: #555;
   }
-  
+  .header-text {
+    font-weight: bold;
+    font-style: italic;
+    color: #333; 
+
+}
+
