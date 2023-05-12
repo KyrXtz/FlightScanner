@@ -54,9 +54,8 @@ export class FindFlightsComponent {
         'departureDate': ['',Validators.required]
       })
 
-      this.minDepartureDate = new Date();
-      this.maxDepartureDate = new Date();
-      this.maxDepartureDate.setMonth(this.minDepartureDate.getMonth() + 3);
+      this.minDepartureDate = this.getTomorrow();
+      this.maxDepartureDate = this.getEndOfMonth()
       this.findFlightsForm.get('departureDate')?.setValue(this.formatDate(this.minDepartureDate));
   }
 
@@ -104,16 +103,16 @@ export class FindFlightsComponent {
     return control!.disabled;
   }
 
-  getStartOfMonth(): string {
+  getTomorrow(): Date {
     const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    return startOfMonth.toISOString().split('T')[0];
+    const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    return tomorrow;
   }
   
-  getEndOfMonth(): string {
+  getEndOfMonth(): Date {
     const now = new Date();
     const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    return endOfMonth.toISOString().split('T')[0];
+    return endOfMonth;
   }
 
   onDateSelected(event: any): void {
