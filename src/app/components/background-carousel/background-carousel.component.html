@@ -1,0 +1,5 @@
+<div *ngFor="let imageState of imageStates" 
+     class="carousel" 
+     [style.background-image]=" 'url(' + imageState.url + ')' " 
+     [@fade]="imageState.state">
+</div>

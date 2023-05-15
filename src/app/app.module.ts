@@ -23,6 +23,7 @@ import { LoadAirportsService } from './services/load-airports.service';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { BackgroundCarouselComponent } from './components/background-carousel/background-carousel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
     StartCheckInComponent,
     CheckInComponent,
     ConfirmCheckInComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    BackgroundCarouselComponent
   ],
   imports: [
     BrowserModule,
