@@ -1,8 +1,8 @@
 # FlightScanner
-This project, FlightServicesFrontend, is a demonstration of a flight booking and check-in system created with Angular CLI version 15.1.6.
+This project, FlightScanner, is a demonstration of a flight booking and check-in system created with Angular CLI version 15.1.6.
 
 ## Project Overview
-FlightServicesFrontend is a web application that allows users to search for flights, make reservations, and complete the check-in process. This project is intended to showcase modern web development skills, particularly in Angular, and is not intended for commercial use.
+FlightScanner is a web application that allows users to search for flights, make reservations, and complete the check-in process. This project is intended to showcase modern web development skills, particularly in Angular, and is not intended for commercial use.
 
 ### Features
 - _Flight Search_: Allows users to search for flights by destination, date.
@@ -15,11 +15,11 @@ Ensure you have Node.js and npm installed on your machine. Angular CLI is also r
 
 Clone the repository:
 ```
-git clone https://github.com/yourgithubusername/FlightServicesFrontend.git
+git clone https://github.com/KyrXtz/FlightScanner.git
 ```
 Navigate to the project directory:
 ```
-cd FlightServicesFrontend
+cd FlightScanner
 ```
 Install the dependencies:
 ```
