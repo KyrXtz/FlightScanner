@@ -1,4 +1,4 @@
-# FlightServicesFrontend
+# FlightScanner
 This project, FlightServicesFrontend, is a demonstration of a flight booking and check-in system created with Angular CLI version 15.1.6.
 
 ## Project Overview
