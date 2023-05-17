@@ -11,7 +11,7 @@ import { LoadingIndicatorService } from './services/loading-indicator.service';
 })
 
 export class AppComponent {
-  title = 'flightServicesFrontend';
+  title = 'flightScanner';
 
   constructor(private loadingIndicatorService: LoadingIndicatorService, private spinner: NgxSpinnerService) { 
 
