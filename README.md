@@ -30,6 +30,11 @@ Run the development server:
 ng serve
 ```
 Visit http://localhost:4200/ in your web browser.
+###### Note
+Depending on how you set up the [FlightServices](https://github.com/KyrXtz/FlightServices) Backend, you might need to change the dp path, located in
+```
+/src/app/resources/constants.ts
+```
 #### Testing
 
 This project uses Jasmine and Karma for unit tests. To run the tests, use the following command:
