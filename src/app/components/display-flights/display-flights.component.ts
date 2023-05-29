@@ -57,6 +57,7 @@ export class DisplayFlightsComponent {
 
   onSelect(id: number): any {
     this.router.navigate(['/passengerDetails', id], {
+      skipLocationChange: true,
       state: { 
         flightsData: JSON.stringify(this.flightsData),
         from: this.from,
@@ -67,6 +68,7 @@ export class DisplayFlightsComponent {
 
   goBack(): void {  
     this.router.navigate(['/findFlights'], {
+      skipLocationChange: true,
       state: { 
         from: this.from,
         to: this.to

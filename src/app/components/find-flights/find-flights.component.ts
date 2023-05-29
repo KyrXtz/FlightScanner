@@ -171,6 +171,7 @@ export class FindFlightsComponent {
     this.reservationService.getFlights(from, to, departureDate).subscribe(
       flightsData =>{
         this.router.navigate(['/displayFlights'], {
+          skipLocationChange: true,
           state: {
             flightsData: JSON.stringify(flightsData),
             from: this.findFlightsForm.get('from')?.value,

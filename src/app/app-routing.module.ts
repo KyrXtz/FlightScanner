@@ -9,9 +9,10 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PassengerDetailsComponent } from './components/passenger-details/passenger-details.component';
 import { StartCheckInComponent } from './components/start-check-in/start-check-in.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path:'', redirectTo:'landingPage', pathMatch:'full'},
+  {path:'', component:AppComponent},
   {path:'landingPage', component:LandingPageComponent},
   {path:'findFlights', component:FindFlightsComponent},
   {path:'displayFlights', component:DisplayFlightsComponent},

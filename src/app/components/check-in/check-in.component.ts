@@ -56,7 +56,7 @@ export class CheckInComponent {
     this.checkInForm.value.checkIn = true;
 
     this.checkInService.checkIn(this.checkInForm.value).subscribe((res : any) => {
-      this.router.navigate(['/confirmCheckIn'])
+      this.router.navigate(['/confirmCheckIn'], { skipLocationChange: true })
     })
   }
   formatDate(dateString: string): string {

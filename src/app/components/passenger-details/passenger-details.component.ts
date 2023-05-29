@@ -70,7 +70,7 @@ export class PassengerDetailsComponent {
     this.passengerDetailsForm.value.flightId = this.flightData.id;
 
     this.reservationService.saveReservation(this.passengerDetailsForm.value).subscribe((res: any) => {
-      this.router.navigate(['/confirm', res.encryptedId])
+      this.router.navigate(['/confirm', res.encryptedId] ,{ skipLocationChange: true })
     })
     console.log(this.passengerDetailsForm.value);
   }
@@ -79,6 +79,7 @@ export class PassengerDetailsComponent {
   }
   goBack(): void {
     this.router.navigate(['/displayFlights'], {
+      skipLocationChange: true,
       state: { 
         flightsData: this.flightsData,
         from: this.from,

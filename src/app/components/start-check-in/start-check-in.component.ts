@@ -16,12 +16,13 @@ export class StartCheckInComponent {
     this.checkInService.getReservation(id).subscribe(
       reservationData =>{
         console.log(reservationData)
-        let navigationExtras: NavigationExtras = {
+        
+        this.router.navigate(['/checkIn'], {
+          skipLocationChange: true,
           state: {
             reservationData: JSON.stringify(reservationData)
           }
-        };
-        this.router.navigate(['/checkIn'], navigationExtras);
+        });
       }
     );
   }
