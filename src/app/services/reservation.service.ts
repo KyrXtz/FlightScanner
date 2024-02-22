@@ -33,6 +33,14 @@ export class ReservationService {
     );
   }
 
+  public getRandomFlights(){
+    return this._httpClient.get(this.flightUri+"/random")
+    .pipe(
+      map(response => response),
+      catchError((error) => handleError(error, undefined))
+    );
+  }
+
   public saveReservation(reservation:any){
     return this._httpClient.post(this.reservationtUri,reservation)
     .pipe(

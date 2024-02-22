@@ -51,6 +51,9 @@
           <div class="col-md-12 text-center">
             <button type="submit" class="btn btn-primary mt-3">Search Flights</button>
           </div>
+          <div *ngIf="showRandomFlightsButton()" class="col-md-12 text-center">
+            <button type="button" class="btn btn-random-flight mt-3" (click)="fetchRandomFlights()">Random Flights</button>
+          </div>
         </div>
       </form>
     </div>

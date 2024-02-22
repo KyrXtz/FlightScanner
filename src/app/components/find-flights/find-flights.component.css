@@ -102,7 +102,7 @@
 
 .btn:hover {
   color: #fff;
-  background-color: #0069d9;
+  background-color: #014894;
   border-color: #0062cc;
 }
 
@@ -149,3 +149,26 @@ input[disabled] {
 .input-group input {
   padding-right: 2.5rem; 
 }
+
+.btn-random-flight {
+  background-color: #91891e; 
+  color: white;
+  border-color: #6c757d;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  display: inline-block;
+  vertical-align: middle; 
+}
+
+.btn-random-flight:hover,
+.btn-random-flight:focus {
+  background-color: #555114; 
+  border-color: #545b62;
+}
+
+
+
+

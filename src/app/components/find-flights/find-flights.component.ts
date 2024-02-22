@@ -21,6 +21,7 @@ export class FindFlightsComponent {
   selectedAirports: { code: string, name: string, country: string }[] = [];
 
   currentControl : string = "";
+  showRandomFlights: boolean = false;
 
   minDepartureDate: Date;
   maxDepartureDate: Date;
@@ -54,20 +55,8 @@ export class FindFlightsComponent {
         'departureDate': ['',Validators.required]
       })
 
-      const navigation = this.router.getCurrentNavigation();
-      const state = navigation?.extras.state as {from: string, to: string};
-      if (state) {
-        if(state.from !== ''){
-          this.findFlightsForm.get('from')?.setValue(state.from);
-          this.findFlightsForm.get('from')?.disable();
-        }
-        
-        if(state.to !== ''){
-          this.findFlightsForm.get('to')?.setValue(state.to);
-          this.findFlightsForm.get('to')?.disable();
-        }
-      }
-
+      this.isNavigatingBack();
+      
       this.minDepartureDate = this.getTomorrow();
       this.maxDepartureDate = this.getEndOfMonth()
       this.findFlightsForm.get('departureDate')?.setValue(this.formatDate(this.minDepartureDate));
@@ -117,6 +106,10 @@ export class FindFlightsComponent {
     return control!.disabled;
   }
 
+  showRandomFlightsButton(): boolean {
+    return this.showRandomFlights;
+  }
+
   getTomorrow(): Date {
     const now = new Date();
     const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
@@ -141,15 +134,46 @@ export class FindFlightsComponent {
     let day = `${date.getDate()}`.padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+  
+  private isNavigatingBack(){
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as {from: string, to: string};
+    if (state) {
+      if(state.from !== ''){
+        this.showRandomFlightsMessage();
+        this.showRandomFlights = true;
+        this.findFlightsForm.get('from')?.setValue(state.from);
+        this.findFlightsForm.get('from')?.disable();
+      }
+      
+      if(state.to !== ''){
+        this.showRandomFlightsMessage();
+        this.showRandomFlights = true;
+        this.findFlightsForm.get('to')?.setValue(state.to);
+        this.findFlightsForm.get('to')?.disable();
+      }
+    }
+  }
+
+  private showRandomFlightsMessage() {
+    if (sessionStorage.getItem('RandomFlightsMessageShown') === null) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Hey!',
+        text: 'You can also select "Random Flights", just to check the functionality of the app!',
+      });
+      sessionStorage.setItem('RandomFlightsMessageShown', 'true');
+    }
+  }
 
   onDateFocus(): void {
-    if (sessionStorage.getItem('firstClick') === null) {
+    if (sessionStorage.getItem('firstClickCalendar') === null) {
       Swal.fire({
         icon: 'info',
         title: 'Hey!',
         text: 'Please note that the free plan of the Aviation Flights Data API is being used, so only flights for the current month are available!',
       });
-      sessionStorage.setItem('firstClick', 'false');
+      sessionStorage.setItem('firstClickCalendar', 'false');
     }
   }
 
@@ -169,15 +193,23 @@ export class FindFlightsComponent {
         return;
     }
     this.reservationService.getFlights(from, to, departureDate).subscribe(
-      flightsData =>{
-        this.router.navigate(['/displayFlights'], {
-          skipLocationChange: true,
-          state: {
-            flightsData: JSON.stringify(flightsData),
-            from: this.findFlightsForm.get('from')?.value,
-            to: this.findFlightsForm.get('to')?.value
-        }});
-      }
+      flightsData => this.navigateToDisplayFlights(flightsData)
     );
   }
+
+  fetchRandomFlights() {
+    this.reservationService.getRandomFlights().subscribe(
+      flightsData => this.navigateToDisplayFlights(flightsData)
+    );
+  }
+
+  private navigateToDisplayFlights(flightsData: Object){
+    this.router.navigate(['/displayFlights'], {
+      skipLocationChange: true,
+      state: {
+        flightsData: JSON.stringify(flightsData),
+        from: this.findFlightsForm.get('from')?.value,
+        to: this.findFlightsForm.get('to')?.value
+    }});
+  }  
 }
